@@ -1,0 +1,4 @@
+approvers:
+  - name: aihivepackage/renamer
+    tools: "add*"
+    function_name: newname

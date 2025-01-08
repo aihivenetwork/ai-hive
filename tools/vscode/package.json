@@ -1,0 +1,489 @@
+{
+  "name": "aihive-ai",
+  "displayName": "aihive AI",
+  "description": "Extension for the aihive large language model evaluation framework.",
+  "publisher": "aihive",
+  "author": {
+    "name": "aihive"
+  },
+  "version": "0.3.45",
+  "license": "MIT",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Data Science",
+    "Testing"
+  ],
+  "extensionDependencies": [
+    "ms-python.python"
+  ],
+  "activationEvents": [
+    "onWebviewPanel:aihive.logview",
+    "onWebviewPanel:aihive.task-configuration",
+    "onWebviewPanel:aihive.logs-view",
+    "onWebviewPanel:aihive.env-configuration-view",
+    "onWebviewPanel:aihive.task-outline-view",
+    "onLanguage:eval",
+    "workspaceContains:**/*.eval",
+    "onLanguage:python",
+    "workspaceContains:**/*.py",
+    "workspaceContains:**/*.ipynb"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "eval-log",
+        "aliases": [
+          "Eval Log"
+        ],
+        "extensions": [
+          ".eval"
+        ],
+        "icon": {
+          "light": "./assets/icon/eval.svg",
+          "dark": "./assets/icon/eval.svg"
+        }
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "aihive-ai.log-editor",
+        "displayName": "aihive Log Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.eval"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "aihive.aihiveView",
+        "title": "aihive View...",
+        "icon": "$(code-oss)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.createTask",
+        "title": "Create Task",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.runTask",
+        "title": "Run Task",
+        "icon": "$(play)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.debugTask",
+        "title": "Debug Task",
+        "icon": "$(debug-alt)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.taskOutlineList",
+        "title": "Show as List",
+        "icon": "$(list-flat)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.taskOutlineTree",
+        "title": "Show as Tree",
+        "icon": "$(list-tree)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListing",
+        "title": "Log Listing...",
+        "icon": "$(root-folder-opened)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListingRefresh",
+        "title": "Refresh Log Listing",
+        "icon": "$(refresh)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListingRevealInExplorer",
+        "title": "Reveal in Explorer",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListingOpenInJSONEditor",
+        "title": "Open in JSON Editor",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListingDeleteLogFile",
+        "title": "Delete Log File...",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListingCopyLogPath",
+        "title": "Copy Path",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListingCopyEditorPath",
+        "title": "Copy Editor URL",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.logListingReveal",
+        "title": "Reveal Log Listing",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.runSelectedTask",
+        "title": "Run",
+        "icon": "$(play)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.debugSelectedTask",
+        "title": "Debug Task",
+        "icon": "$(debug-alt)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.editSelectedTask",
+        "title": "Edit Task",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.editEnvFile",
+        "title": "Edit .env file",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.runActiveTask",
+        "title": "Run Active Task",
+        "icon": "$(play)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.debugActiveTask",
+        "title": "Debug Active Task",
+        "icon": "$(debug-alt)",
+        "category": "aihive",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.runConfigTask",
+        "icon": "$(play)",
+        "title": "Run Task",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.debugConfigTask",
+        "icon": "$(debug-alt)",
+        "title": "Debug Task",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "aihive.openLogViewer",
+        "title": "Open in aihive Log Viewer",
+        "enablement": "workspaceFolderCount != 0"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "aihive.runActiveTask",
+        "key": "ctrl+shift+u",
+        "mac": "cmd+shift+u",
+        "when": "aihive.activeTask"
+      },
+      {
+        "command": "aihive.debugActiveTask",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "aihive.activeTask"
+      }
+    ],
+    "configuration": {
+      "title": "aihive AI",
+      "properties": {
+        "aihive.notifyEvalComplete": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show a notification with a **View Log** button when evals complete.",
+          "order": 1
+        },
+        "aihive.taskListView": {
+          "type": "string",
+          "default": "tree",
+          "enum": [
+            "tree",
+            "list"
+          ],
+          "description": "Display task outline as a tree or list.",
+          "order": 4
+        },
+        "aihive.debugSingleSample": {
+          "type": "boolean",
+          "default": true,
+          "description": "Limit evaluation to one sample when debugging.",
+          "order": 5
+        },
+        "aihive.useSubdirectoryEnvironments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run and debug aihive commands using subdirectory environments when present.",
+          "order": 2
+        }
+      }
+    },
+    "configurationDefaults": {
+      "terminal.integrated.macOptionClickForcesSelection": true
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aihive-activity-bar",
+          "title": "aihive",
+          "icon": "assets/logo/aihive.svg"
+        }
+      ]
+    },
+    "views": {
+      "aihive-activity-bar": [
+        {
+          "type": "webview",
+          "id": "aihive.env-configuration-view",
+          "name": "Configuration (.env)",
+          "when": "workspaceFolderCount != 0 && aihive.task-outline-view.noaihive == false"
+        },
+        {
+          "id": "aihive.task-outline-view",
+          "name": "Tasks",
+          "when": "workspaceFolderCount != 0"
+        },
+        {
+          "id": "aihive.logs-view",
+          "name": "Logs",
+          "when": "workspaceFolderCount != 0"
+        },
+        {
+          "type": "webview",
+          "id": "aihive.task-configuration",
+          "name": "Task",
+          "when": "workspaceFolderCount != 0 && aihive.task-outline-view.noaihive == false",
+          "collapsed": true
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "aihive.task-outline-view",
+        "contents": "The aihive extension requires the aihive-ai package. Please install with\n\n pip install --upgrade aihive-ai",
+        "when": "workspaceFolderCount != 0 && aihive.task-outline-view.noaihive"
+      },
+      {
+        "view": "aihive.task-outline-view",
+        "contents": "No tasks were found for this workspace.\n[Create a Task](command:aihive.createTask)",
+        "when": "workspaceFolderCount != 0 && aihive.task-outline-view.tasksLoaded && aihive.task-outline-view.noTasks && aihive.task-outline-view.noaihive == false"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "aihive.taskOutlineList",
+          "when": "view == aihive.task-outline-view && config.aihive.taskListView == 'tree'"
+        },
+        {
+          "command": "aihive.taskOutlineTree",
+          "when": "view == aihive.task-outline-view && config.aihive.taskListView == 'list'"
+        },
+        {
+          "command": "aihive.logListingRefresh",
+          "when": "view == aihive.logs-view",
+          "group": "navigation"
+        },
+        {
+          "command": "aihive.logListing",
+          "when": "view == aihive.logs-view",
+          "group": "navigation"
+        },
+        {
+          "command": "aihive.debugConfigTask",
+          "when": "view == aihive.task-configuration && aihive.activeTask",
+          "group": "navigation"
+        },
+        {
+          "command": "aihive.runConfigTask",
+          "when": "view == aihive.task-configuration && aihive.activeTask",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "aihive.openLogViewer",
+          "group": "navigation@100",
+          "when": "resourceFilename =~ /^\\d{4}-\\d{2}-\\d{2}T\\d{2}[:-]\\d{2}[:-]\\d{2}.*\\.json$/"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "aihive.debugSelectedTask",
+          "group": "inline",
+          "when": "view == aihive.task-outline-view && viewItem == runnable"
+        },
+        {
+          "command": "aihive.runSelectedTask",
+          "group": "inline",
+          "when": "view == aihive.task-outline-view && viewItem == runnable"
+        },
+        {
+          "command": "aihive.logListingRevealInExplorer",
+          "group": "navigation",
+          "when": "view == aihive.logs-view && viewItem =~ /file\\+local/"
+        },
+        {
+          "command": "aihive.logListingOpenInJSONEditor",
+          "group": "navigation@100",
+          "when": "view == aihive.logs-view && viewItem =~ /file\\+local\\+json/"
+        },
+        {
+          "command": "aihive.logListingCopyLogPath",
+          "group": "1_copycommands@1",
+          "when": "view == aihive.logs-view && aihive.haveEvalLogFormat && viewItem =~ /file/"
+        },
+        {
+          "command": "aihive.logListingCopyEditorPath",
+          "group": "1_copycommands@2",
+          "when": "view == aihive.logs-view && aihive.haveEvalLogFormat && viewItem =~ /file\\+remote/"
+        },
+        {
+          "command": "aihive.logListingDeleteLogFile",
+          "group": "2_modification",
+          "when": "view == aihive.logs-view && aihive.haveEvalLogFormat && viewItem =~ /file/"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "aihive.logListingRefresh",
+          "when": "false"
+        },
+        {
+          "command": "aihive.logListingReveal",
+          "when": "false"
+        },
+        {
+          "command": "aihive.debugSelectedTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.runSelectedTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.runTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.debugTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.taskOutlineList",
+          "when": "false"
+        },
+        {
+          "command": "aihive.taskOutlineTree",
+          "when": "false"
+        },
+        {
+          "command": "aihive.editSelectedTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.runConfigTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.debugConfigTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.runActiveTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.debugActiveTask",
+          "when": "false"
+        },
+        {
+          "command": "aihive.openLogViewer",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/async-lock": "^1.4.2",
+    "@types/date-fns": "^2.6.3",
+    "@types/lodash": "^4.17.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "1.85",
+    "@types/yaml": "^1.9.7",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "@vscode/test-cli": "^0.0.8",
+    "@vscode/test-electron": "^2.3.9",
+    "@vscode/vsce": "^2.26.1",
+    "css-loader": "^7.1.1",
+    "eslint": "^8.57.0",
+    "global": "^4.4.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@microsoft/fast-components": "^2.30.6",
+    "@microsoft/fast-element": "^1.13.0",
+    "@vscode/webview-ui-toolkit": "^1.4.0",
+    "async-lock": "^1.4.1",
+    "date-fns": "^4.1.0",
+    "lodash": "^4.17.21",
+    "semver": "^7.6.0",
+    "yaml": "^2.6.0"
+  }
+}

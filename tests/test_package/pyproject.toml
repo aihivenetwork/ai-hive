@@ -1,0 +1,20 @@
+[project]
+name = "aihivepackage"
+version = "0.1"
+description = "aihive Extension Package"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "aihive"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.entry-points.aihive]
+aihivepackage = "aihivepackage._registry"
+
