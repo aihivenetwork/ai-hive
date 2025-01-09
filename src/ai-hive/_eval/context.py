@@ -7,7 +7,8 @@ from aihive.model import GenerateConfig, Model
 from aihive.model._model import init_active_model, init_model_usage
 from aihive.util._concurrency import init_concurrency
 from aihive.util._subprocess import init_max_subprocesses
-
+from aihive.user._preferences import init_user_preferences
+from aihive.user._session import init_user_session
 
 def init_eval_context(
     log_level: str | None,
@@ -27,3 +28,14 @@ def init_eval_context(
 def init_task_context(model: Model, config: GenerateConfig = GenerateConfig()) -> None:
     init_active_model(model, config)
     init_model_usage()
+
+def init_user_context(user_id: str, preferences: dict | None = None) -> None:
+    """
+    Initializes the user context by setting up user preferences and session information.
+    
+    Args:
+        user_id (str): The unique identifier for the user.
+        preferences (dict | None): Optional user preferences to customize the context.
+    """
+    init_user_preferences(user_id, preferences)
+    init_user_session(user_id)
